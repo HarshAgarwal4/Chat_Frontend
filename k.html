@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat App UI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+  <div class="flex h-screen">
+    <div class="w-1/4 bg-white border-r flex flex-col">
+        <div class="flex justify-around p-4 border-t">
+        <button class="text-gray-500 hover:text-red-500">⚙️</button>
+        <button class="text-gray-500 hover:text-red-500">📁</button>
+        <button class="text-gray-500 hover:text-red-500">📞</button>
+        <button class="text-gray-500 hover:text-red-500">👤</button>
+      </div>
+      <!-- Search -->
+      <div class="p-4">
+        <input 
+          type="text" 
+          placeholder="Search..." 
+          class="w-full rounded-full px-4 py-2 border focus:outline-none focus:ring focus:ring-blue-300"
+        />
+      </div>
+
+      <!-- Conversations -->
+      <div class="flex-1 overflow-y-auto">
+        <div class="px-4 py-3 flex items-center gap-3 bg-red-50 border-l-4 border-red-500 cursor-pointer">
+          <img src="https://via.placeholder.com/40" class="w-10 h-10 rounded-full" />
+          <div class="flex-1">
+            <p class="font-semibold text-gray-900">Chole Adams</p>
+            <p class="text-sm text-gray-500 truncate">Hey Did you just….</p>
+          </div>
+          <span class="bg-red-500 text-white text-xs px-2 py-1 rounded-full">1</span>
+        </div>
+
+        <div class="px-4 py-3 flex items-center gap-3 hover:bg-gray-100 cursor-pointer">
+          <img src="https://via.placeholder.com/40" class="w-10 h-10 rounded-full" />
+          <div class="flex-1">
+            <p class="font-semibold text-gray-900">Amin Rokhead</p>
+            <p class="text-sm text-gray-500 truncate">can you send it to me</p>
+          </div>
+        </div>
+
+        <div class="px-4 py-3 flex items-center gap-3 hover:bg-gray-100 cursor-pointer">
+          <img src="https://via.placeholder.com/40" class="w-10 h-10 rounded-full" />
+          <div class="flex-1">
+            <p class="font-semibold text-gray-900">Zareena</p>
+            <p class="text-sm text-gray-500 truncate">You are a ****</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Window -->
+    <div class="flex-1 flex flex-col">
+      <!-- Header -->
+      <div class="p-4 border-b flex items-center justify-between bg-white">
+        <div class="flex items-center gap-3">
+          <img src="https://via.placeholder.com/40" class="w-10 h-10 rounded-full" />
+          <div>
+            <h2 class="font-semibold">Chole Adams</h2>
+            <p class="text-sm text-green-500">online now</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <button class="text-gray-500 hover:text-red-500">📞</button>
+          <button class="text-gray-500 hover:text-red-500">⋮</button>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50">
+        <!-- Incoming -->
+        <div class="flex gap-3">
+          <img src="https://via.placeholder.com/40" class="w-8 h-8 rounded-full" />
+          <div>
+            <div class="bg-white px-4 py-2 rounded-2xl shadow">
+              <p>Dude this thing we are trying</p>
+            </div>
+            <div class="bg-white px-4 py-2 mt-2 rounded-2xl shadow">
+              <p>will be the best failure in design</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Outgoing -->
+        <div class="flex justify-end">
+          <div class="bg-red-500 text-white px-4 py-2 rounded-2xl shadow max-w-xs">
+            <p>But if we leave like we don't care we can't design stuffs girl don't care about criticism</p>
+          </div>
+        </div>
+
+        <!-- Outgoing -->
+        <div class="flex justify-end">
+          <div class="bg-red-500 text-white px-4 py-2 rounded-2xl shadow max-w-xs">
+            <p>I already published it 😜</p>
+          </div>
+        </div>
+
+        <!-- Incoming -->
+        <div class="flex gap-3">
+          <img src="https://via.placeholder.com/40" class="w-8 h-8 rounded-full" />
+          <div class="bg-white px-4 py-2 rounded-2xl shadow">
+            <p>Hey Did you just ……</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message Input -->
+      <div class="p-4 border-t flex items-center gap-3 bg-white">
+        <input 
+          type="text" 
+          placeholder="Type your message and press enter…" 
+          class="flex-1 rounded-full px-4 py-2 border focus:outline-none focus:ring focus:ring-blue-300"
+        />
+        <button class="bg-red-500 text-white px-4 py-2 rounded-full">➤</button>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
