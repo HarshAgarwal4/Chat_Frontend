@@ -2,17 +2,24 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserButton } from "@clerk/clerk-react";
 import { AppContext } from "../context/GlobalContext";
 import Contact from "./Contact";
+import { fetchUser } from "../../../backend/client/controllers/user";
 
 const Sidebar = () => {
   const {
     setSelectedUser, contacts, allUsers, sendRequest,
     AcceptRequest, RejectRequest, displayList, setDisplayList,
-    Incoming, sended, loadingUsers
+    Incoming, sended, loadingUsers, fetchUser
   } = useContext(AppContext)
 
   const [section, setSection] = useState('contacts')
   const [addUsers, setAddUsers] = useState(false)
   const [msg, setMsg] = useState("No contacts added yet")
+
+  useEffect(() => {
+    if (section === 'contacts') {
+      fetchUser()
+    }
+  }, [section])
 
   useEffect(() => {
     switch (section) {
@@ -85,7 +92,7 @@ const Sidebar = () => {
           displayList.map((item, idx) => {
             if (section === 'contacts') {
               return (
-               <Contact key={idx} item={item} />
+                <Contact key={idx} item={item} />
               )
             }
             else if (section === 'addUsers') {

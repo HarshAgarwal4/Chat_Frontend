@@ -12,7 +12,7 @@ const Dashboard = () => {
   const { user } = useUser();
   const navigate = useNavigate()
   const location = useLocation()
-  const { User, messages, setUser, selectedUser, setSelectedUser, loadUsers, saveInDB, fetchUser, socket, contacts, setContacts } = useContext(AppContext)
+  const { User, messages, setUser, selectedUser, setSelectedUser, loadUsers, saveInDB, Incoming, fetchUser, socket, contacts, setContacts, setIncoming } = useContext(AppContext)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -66,7 +66,10 @@ const Dashboard = () => {
       };
       const obj2 = {
         byMe: false,
-        message: obj.msg
+        message: obj.msg,
+        Time: obj.Time,
+        Date: obj.Date,
+        status: "seen"
       }
       setContacts(prevContacts =>
         prevContacts.map(item =>
@@ -77,7 +80,48 @@ const Dashboard = () => {
       );
     };
 
+    const handleRecievedRequest = (obj) => {
+      let obj2 = {
+        From: {
+          userId: obj.userId,
+          username: obj.username,
+          avatar: obj.avatar
+        },
+        status: "pending"
+      }
+      let r = Incoming.find(item => item.From.userId === obj.userId)
+      if(!r) {
+        setIncoming(prev => [...prev, obj2]);
+      }
+    }
+
+    const handleAccepted = (obj) => {
+      let obj2 = {
+        userId: obj.userId,
+        username: obj.username,
+        avatar : obj.avatar,
+        messages: [],
+        DisplayName: obj.username || null
+      }
+      let r = contacts.find(item => item.userId === obj.userId)
+      if(!r){
+        setContacts(prev => [...prev , obj2])
+      }
+    }
+
+    const handleOnlineStatus = (id) => {
+      setContacts(prev => prev.map(item => item.userId === id ? {...item , status:"online"} :item))
+    }
+
+    const handleOfllineStatus = (id) => {
+      setContacts(prev => prev.map(item => item.userId === id?{...item , status:"offline"}:item))
+    }
+
     socket.on('recieve-message', handleRecievedMessage);
+    socket.on('recieved-request', handleRecievedRequest)
+    socket.on('accepted', handleAccepted)
+    socket.on('Online-status' , handleOnlineStatus)
+    socket.on('Offline-status' , handleOfllineStatus)
 
     return () => {
       socket.off('recieve-message', handleRecievedMessage);

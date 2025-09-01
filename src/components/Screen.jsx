@@ -1,8 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
-import { AppContext } from "../context/GlobalContext";
-import { useForm } from 'react-hook-form';
-import Message from "./Message";
-import Recievd from './Recievd';
+import React, { useContext, useEffect, useRef } from "react"; import { AppContext } from "../context/GlobalContext"; import { useForm } from 'react-hook-form'; import Message from "./Message"; import Recievd from './Recievd';
 
 const Screen = () => {
     const { selectedUser, setSelectedUser, socket, setMessages, messages, User, contacts, setContacts } = useContext(AppContext);
@@ -21,10 +17,11 @@ const Screen = () => {
     }, [messages]);
 
     const onSubmit = (data) => {
+        let time = new Date();
         let obj = {
             from: User.clerkId,
             to: selectedUser.userId,
-            msg: data.msg
+            msg: data.msg,
         };
         socket.emit('send-message', obj);
 
@@ -33,7 +30,13 @@ const Screen = () => {
         setContacts(prevContacts =>
             prevContacts.map(item =>
                 item.userId === selectedUser.userId
-                    ? { ...item, messages: [...item.messages, { byMe: true, message: data.msg }] }
+                    ? {
+                        ...item, messages: [...item.messages, {
+                            byMe: true, message: data.msg, Time: time.toLocaleTimeString().slice(0, 5),
+                            Date: "09/02/2025" ,//time.toLocaleDateString(),
+                            status: "seen"
+                        }]
+                    }
                     : item
             )
         );
@@ -58,19 +61,39 @@ const Screen = () => {
                 </button>
             </div>
 
-            {/* Messages area (scrollable) */}
+            {/* Messages with Date Grouping */}
             <div className="flex-1 p-4 overflow-y-auto flex flex-col gap-2">
-                {messages.map((item, idx) =>
-                    item.byMe
-                        ? <Message key={idx} message={item.message} />
-                        : <Recievd key={idx} message={item.message} />
-                )}
+                {(() => {
+                    let lastDate = null;
+                    return messages.map((item, idx) => {
+                        const showDivider = lastDate !== item.Date;
+                        lastDate = item.Date;
+
+                        return (
+                            <div key={idx}>
+                                {showDivider && (
+                                    <div className="flex justify-center my-2">
+                                        <span className="bg-gray-200 text-gray-700 text-xs px-3 py-1 rounded-full shadow">
+                                            {item.Date}
+                                        </span>
+                                    </div>
+                                )}
+
+                                {item.byMe ? (
+                                    <Message Time={item.Time} status={item.status} message={item.message} />
+                                ) : (
+                                    <Recievd message={item.message} />
+                                )}
+                            </div>
+                        );
+                    });
+                })()}
                 <div ref={bottomRef}></div>
             </div>
 
-            {/* Input form (stays at bottom) */}
-            <form 
-                onSubmit={handleSubmit(onSubmit)} 
+            {/* Input form */}
+            <form
+                onSubmit={handleSubmit(onSubmit)}
                 className="p-4 border-t flex items-center gap-4"
             >
                 <input
@@ -87,6 +110,8 @@ const Screen = () => {
             </form>
         </div>
     );
+
+
 };
 
 export default Screen;

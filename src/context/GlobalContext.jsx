@@ -61,6 +61,15 @@ const GlobalContext = ({ children }) => {
 					const newObj = { To: { userId: to, username, avatar }, status: "Pending" }
 					setallUsers(prev => prev.filter(item => item.username !== username))
 					setSended(prev => [...prev, newObj])
+					let obj3 = {
+						myusername: User.username,
+						myavatar: User.avatar,
+						myuserId: User.clerkId,
+						userId: to,
+						avatar: avatar,
+						username: username
+					}
+					socket.emit('send-request' , obj3 )
 				}
 			}
 		} catch (err) {
@@ -92,6 +101,13 @@ const GlobalContext = ({ children }) => {
 						DisplayName: username || null
 					}
 					setContacts(prev => [...prev, newContact])
+					let obj = {
+						userId: id,
+						myuserId: User.clerkId,
+						username: User.username,
+						avatar: User.avatar
+					}
+					socket.emit('accept-request' , obj)
 				}
 			}
 		} catch (err) {
@@ -156,6 +172,7 @@ const GlobalContext = ({ children }) => {
 	useEffect(() => {
 		if (selectedUser) {
 			const contact = contacts.find(item => item.userId === selectedUser.userId)
+			setSelectedUser(contact)
 			setMessages(contact?.messages)
 		}
 	}, [selectedUser, contacts])
