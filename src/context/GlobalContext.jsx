@@ -43,6 +43,23 @@ const GlobalContext = ({ children }) => {
 		}
 	}
 
+	useEffect(() => {
+		async function test() {
+			try{
+				let r = await axios.get('/test-cors')
+				if(r.status === 200) {
+					alert("Request sent " + res.data)
+				}
+				else{
+					alert("error in code")
+				}
+			}catch(err){
+				alert("Request not sent to server")
+			}
+		}
+		test()
+	},[])
+
 	async function sendRequest(to, username, avatar) {
 		if (!User) return
 		const obj = {
