@@ -32,8 +32,15 @@ const Screen = () => {
                 item.userId === selectedUser.userId
                     ? {
                         ...item, messages: [...item.messages, {
-                            byMe: true, message: data.msg, Time: time.toLocaleTimeString().slice(0, 5),
-                            Date: "09/02/2025" ,//time.toLocaleDateString(),
+                            byMe: true, message: data.msg, Time: time.toLocaleTimeString([], {
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            }),
+                            Date: time.toLocaleDateString([], {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric'
+                            }),
                             status: "seen"
                         }]
                     }
@@ -44,7 +51,6 @@ const Screen = () => {
 
     return (
         <div className="flex-1 fixed w-[100vw] md:w-[75vw] right-0 h-[100vh] flex flex-col bg-white">
-            {/* Header */}
             <div className="p-4 border-b flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <img src={selectedUser.avatar} className="w-10 h-10 rounded-full" alt="avatar" />
@@ -82,7 +88,7 @@ const Screen = () => {
                                 {item.byMe ? (
                                     <Message Time={item.Time} status={item.status} message={item.message} />
                                 ) : (
-                                    <Recievd message={item.message} />
+                                    <Recievd message={item.message} Time={item.Time} />
                                 )}
                             </div>
                         );

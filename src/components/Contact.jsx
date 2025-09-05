@@ -5,13 +5,14 @@ import axios from "../services/axios";
 
 const Contact = ({ item }) => {
     const [editMode, setEdit] = useState(false);
-    const { selectedUser, setSelectedUser ,contacts, setContacts} = useContext(AppContext);
+    const { selectedUser, setSelectedUser ,contacts, setContacts , User} = useContext(AppContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     async function updateName(id , name) {
         let obj = {
             id,
-            name
+            name,
+            userId: User.clerkId
         }
         try{
             let res = await axios.post('/setname' , obj)

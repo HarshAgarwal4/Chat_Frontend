@@ -50,7 +50,8 @@ const GlobalContext = ({ children }) => {
 			username,
 			avatar,
 			myUsername: User.username,
-			myavatar: User.avatar
+			myavatar: User.avatar,
+			UserId: User.clerkId
 		}
 		try {
 			const res = await axios.post('/send-request', obj)
@@ -84,7 +85,8 @@ const GlobalContext = ({ children }) => {
 			username,
 			avatar,
 			myusername: User.username,
-			myavatar: User.avatar
+			myavatar: User.avatar,
+			UserId: User.clerkId
 		}
 		try {
 			const res = await axios.post('/accept-request', obj)
@@ -117,7 +119,7 @@ const GlobalContext = ({ children }) => {
 
 	async function RejectRequest(id) {
 		try {
-			const res = await axios.post('/reject-request', { id })
+			const res = await axios.post('/reject-request', {UserId:User.clerkId, id })
 			if (res.status === 200) {
 				if (res.data.status === 2) alert("Request failed")
 				if (res.data.status === 1) {
@@ -132,7 +134,7 @@ const GlobalContext = ({ children }) => {
 
 	async function saveInDB() {
 		try {
-			const r = await axios.post('/saveUser')
+			const r = await axios.post('/saveUser' , {UserId: user.id})
 			if (r.status === 200) {
 				if (r.data.status === 0) alert("Something went wrong")
 				if (r.data.status === 1) alert("Data saved in DB")
@@ -143,10 +145,9 @@ const GlobalContext = ({ children }) => {
 		}
 	}
 
-
 	async function fetchUser() {
 		try {
-			const res = await axios.get('/me')
+			const res = await axios.post('/me' , {UserId: user.id})
 			if (res.status === 200) {
 				if (res.data.status === 0 || res.data.status === 2) alert("Something went wrong")
 				if (res.data.status === 1) {
