@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/": {
-        target: import.meta.env.VITE_REACT_APP_BACKEND_URL,
+        target: "https://chat-backend-silk-nine.vercel.app",
         changeOrigin: true,
         secure: false
       }
