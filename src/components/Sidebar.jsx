@@ -60,27 +60,27 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="fixed top-0 left-0 h-[100vh] w-[100vw] md:w-[25vw] bg-white border-r flex flex-col">
-      <div className="flex justify-around p-4 border-t">
+    <div className="fixed top-0 left-0 h-[100vh] w-[100vw] md:w-[25vw] bg-purple-50 border-r flex flex-col">
+      <div className="flex justify-around p-4 py-6  ">
         <UserButton />
-        <button className="text-gray-500 hover:text-red-500" onClick={() => setSection('contacts')}>🧾</button>
-        <button className="text-gray-500 hover:text-red-500" onClick={() => setSection('Incoming')}>📥</button>
-        <button className="text-gray-500 hover:text-red-500" onClick={() => setSection('sent')}>📤</button>
-        <button className="text-gray-500 hover:text-red-500" onClick={() => setSection('addUsers')}>👤</button>
+        <button className="text-gray-500 hover:text-red-500 cursor-pointer" onClick={() => setSection('contacts')}>🧾</button>
+        <button className="text-gray-500 hover:text-red-500 cursor-pointer" onClick={() => setSection('Incoming')}>📥</button>
+        <button className="text-gray-500 hover:text-red-500 cursor-pointer" onClick={() => setSection('sent')}>📤</button>
+        <button className="text-gray-500 hover:text-red-500 cursor-pointer" onClick={() => setSection('addUsers')}>👤</button>
       </div>
 
-      <div className="p-4">
+      <div className="p-4 py-6">
         <input
           type="text"
           placeholder="Search user"
-          className="w-full rounded-full px-4 py-2 border focus:outline-none focus:ring focus:ring-blue-300"
+          className="w-full rounded-full px-4 py-2 border border-black focus:outline-none focus:ring focus:ring-blue-300"
           onInput={handleChange}
         />
       </div>
 
       <div className="flex-1 overflow-y-auto flex flex-col gap-2">
         {displayList.length === 0 ? (
-          <span className="text-center">{msg}</span>
+          <span className="text-center py-5 text-black">{msg}</span>
         ) : (
           displayList.map((item, idx) => {
             if (section === 'contacts') {

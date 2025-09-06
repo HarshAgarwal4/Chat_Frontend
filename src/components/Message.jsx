@@ -7,7 +7,7 @@ const Message = (props) => {
 
     return (
         <div className="flex justify-end my-1 px-2">
-            <div className="bg-red-500 text-white rounded-2xl shadow-md max-w-xs px-3 py-2 relative">
+            <div className="bg-purple-700 text-white rounded-2xl shadow-md max-w-xs px-3 py-2 relative">
                 <p className="text-sm leading-snug break-words pr-10 mr-4">{props.message}</p>
                 <div className="absolute bottom-1 right-3 flex items-center gap-1 text-[10px]">
                     <span className="opacity-80">{props.Time}</span>
