@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserButton } from "@clerk/clerk-react";
 import { AppContext } from "../context/GlobalContext";
 import Contact from "./Contact";
+import { Users, Inbox, Send, UserPlus } from "lucide-react";
 
 const Sidebar = () => {
   const {
@@ -63,10 +64,38 @@ const Sidebar = () => {
     <div className="fixed top-0 left-0 h-[100vh] w-[100vw] md:w-[25vw] bg-purple-50 border-r flex flex-col">
       <div className="flex justify-around p-4 py-6  ">
         <UserButton />
-        <button className="text-gray-500 hover:text-red-500 cursor-pointer" onClick={() => setSection('contacts')}>🧾</button>
-        <button className="text-gray-500 hover:text-red-500 cursor-pointer" onClick={() => setSection('Incoming')}>📥</button>
-        <button className="text-gray-500 hover:text-red-500 cursor-pointer" onClick={() => setSection('sent')}>📤</button>
-        <button className="text-gray-500 hover:text-red-500 cursor-pointer" onClick={() => setSection('addUsers')}>👤</button>
+        <button
+          title="contacts"
+          className="cursor-pointer flex items-center gap-2 text-gray-500 hover:text-red-500"
+          onClick={() => setSection('contacts')}
+        >
+          <Users size={20} />
+        </button>
+
+        <button
+          title="Incoming Requests"
+          className="cursor-pointer flex items-center gap-2 text-gray-500 hover:text-red-500"
+          onClick={() => setSection('Incoming')}
+        >
+          <Inbox size={20} />
+        </button>
+
+        <button
+          title="Send Requests"
+          className="cursor-pointer flex items-center gap-2 text-gray-500 hover:text-red-500"
+          onClick={() => setSection('sent')}
+        >
+          <Send size={20} />
+        </button>
+
+        <button
+          title="Search Users"
+          className="cursor-pointer flex items-center gap-2 text-gray-500 hover:text-red-500"
+          onClick={() => setSection('addUsers')}
+        >
+          <UserPlus size={20} />
+        </button>
+
       </div>
 
       <div className="p-4 py-6">

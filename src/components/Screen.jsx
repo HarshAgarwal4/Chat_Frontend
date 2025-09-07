@@ -59,7 +59,7 @@ const Screen = () => {
     };
 
     return (
-        <div className="flex-1 fixed w-[100vw] md:w-[75vw] right-0 h-[100vh] flex flex-col bg-white text-black">
+        <div className="flex-1 fixed w-[100vw] md:w-[75vw] right-0 h-[90vh] md:h-[100vh] flex flex-col bg-white text-black">
             <div className="p-4 border-b flex items-center justify-between bg-purple-50">
                 <div className="flex items-center gap-3">
                     <img src={selectedUser.avatar} className="w-10 h-10 rounded-full" alt="avatar" />
@@ -119,6 +119,7 @@ const Screen = () => {
                     })}
                     type="text"
                     placeholder="Type your message and press enter…"
+                    autoComplete="off"
                     className="flex-1 rounded-full px-4 py-2 border focus:outline-none focus:ring focus:ring-blue-300"
                 />
                 <button className="bg-purple-800 text-white px-4 py-2 rounded-full">➤</button>
