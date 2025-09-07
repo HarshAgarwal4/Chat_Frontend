@@ -102,7 +102,7 @@ const Sidebar = () => {
         <input
           type="text"
           placeholder="Search user"
-          className="w-full rounded-full px-4 py-2 border border-black focus:outline-none focus:ring focus:ring-blue-300"
+          className="w-full rounded-full px-4 py-2 border border-black focus:outline-none focus:ring text-black  focus:ring-blue-300"
           onInput={handleChange}
         />
       </div>
