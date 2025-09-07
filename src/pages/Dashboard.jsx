@@ -56,10 +56,6 @@ const Dashboard = () => {
   }, [User])
 
   useEffect(() => {
-    console.log(contacts)
-  }, [contacts])
-
-  useEffect(() => {
     if (!socket) return;
 
     const handleRecievedMessage = (obj) => {
@@ -114,7 +110,6 @@ const Dashboard = () => {
         messages: [],
         DisplayName: obj.username || null
       }
-      console.log("accepted", obj2)
       let r = contacts.find(item => item.userId === obj.userId)
       if (!r) {
         setContacts(prev => [...prev, obj2])

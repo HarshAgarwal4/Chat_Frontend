@@ -24,7 +24,6 @@ const Screen = () => {
             msg: data.msg,
         };
         socket.emit('check-register', User.clerkId, (response) => {
-            console.log(response);
             if (response.exists) {
                 socket.emit('send-message', obj);
             }
